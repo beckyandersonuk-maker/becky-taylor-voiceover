@@ -484,6 +484,17 @@ img {
     object-fit: cover;
 }
 
+.photo-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 2;
+    font-style: italic;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
 .about-text .section-title {
     text-align: left;
     margin-bottom: 28px;
@@ -778,10 +789,8 @@ img {
 }
 
 .contact-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 64px;
-    align-items: start;
+    max-width: 640px;
+    margin: 0 auto;
 }
 
 .contact-form {
@@ -953,11 +962,6 @@ img {
     .about-image-frame {
         max-width: 400px;
         margin: 0 auto;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
     }
 
     .portfolio-grid {

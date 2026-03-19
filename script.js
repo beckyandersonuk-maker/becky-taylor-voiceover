@@ -37,20 +37,6 @@ const PORTFOLIO_PROJECTS = [
         style: "Clear, engaging, trustworthy",
         videoUrl: null
     },
-    {
-        title: "Coming Soon",
-        client: "Your Project Here?",
-        brief: "I'm always working on new and exciting projects. This space is reserved for the next brilliant thing.",
-        style: "Watch this space",
-        videoUrl: null
-    },
-    {
-        title: "Coming Soon",
-        client: "Get in Touch",
-        brief: "Got a project that needs a voice? Let's make something great together.",
-        style: "Watch this space",
-        videoUrl: null
-    }
 ];
 
 /* --- Helper: Parse video URL to embed URL --- */

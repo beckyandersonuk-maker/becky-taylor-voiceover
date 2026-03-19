@@ -28,14 +28,14 @@ const PORTFOLIO_PROJECTS = [
         client: "GroceryAid",
         brief: "A sensitive yet informative voiceover for an animated campaign promoting a confidential helpline. Aimed at grocery workers facing financial hardship, this required a voice that was compassionate, calm, and reassuring.",
         style: "Supportive, clear, empathetic",
-        videoUrl: null
+        videoUrl: "assets/video/groceryaid.mp4"
     },
     {
         title: "Brand Introduction",
         client: "Wellknown",
         brief: "An agency introduction video aimed at professionals, requiring clear, confident delivery without sounding robotic.",
         style: "Clear, engaging, trustworthy",
-        videoUrl: null
+        videoUrl: "assets/video/wellknown.mp4"
     },
 ];
 
@@ -63,6 +63,11 @@ function getEmbedUrl(url) {
     return null;
 }
 
+/* --- Helper: Check if URL is a local MP4 file --- */
+function isLocalVideo(url) {
+    return url && url.endsWith('.mp4');
+}
+
 /* --- Render Portfolio --- */
 function renderPortfolio() {
     const grid = document.getElementById('portfolioGrid');
@@ -70,16 +75,27 @@ function renderPortfolio() {
 
     grid.innerHTML = PORTFOLIO_PROJECTS.map(project => {
         const embedUrl = getEmbedUrl(project.videoUrl);
+        const isLocal = isLocalVideo(project.videoUrl);
 
-        const videoHTML = embedUrl
-            ? `<div class="portfolio-video">
+        let videoHTML;
+        if (isLocal) {
+            videoHTML = `<div class="portfolio-video portfolio-video-local">
+                   <video controls preload="metadata" playsinline
+                          title="${project.title} — ${project.client}">
+                       <source src="${project.videoUrl}" type="video/mp4">
+                       Your browser does not support the video tag.
+                   </video>
+               </div>`;
+        } else if (embedUrl) {
+            videoHTML = `<div class="portfolio-video">
                    <iframe src="${embedUrl}"
                            title="${project.title} — ${project.client}"
                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                            allowfullscreen
                            loading="lazy"></iframe>
-               </div>`
-            : `<div class="portfolio-video">
+               </div>`;
+        } else {
+            videoHTML = `<div class="portfolio-video">
                    <div class="portfolio-placeholder">
                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                            <polygon points="5 3 19 12 5 21 5 3"/>
@@ -87,6 +103,7 @@ function renderPortfolio() {
                        <span>Video coming soon</span>
                    </div>
                </div>`;
+        }
 
         return `
             <article class="portfolio-card fade-in">

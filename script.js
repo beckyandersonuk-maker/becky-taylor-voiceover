@@ -238,22 +238,10 @@ function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // For now, show a friendly message.
-        // Replace the form action with a real Formspree/Netlify endpoint later.
+    form.addEventListener('submit', () => {
         const btn = form.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.textContent = 'Message Sent!';
-        btn.style.backgroundColor = 'var(--sage)';
+        btn.textContent = 'Sending...';
         btn.disabled = true;
-
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.backgroundColor = '';
-            btn.disabled = false;
-            form.reset();
-        }, 3000);
     });
 }
 
